@@ -1,0 +1,20 @@
+.App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.car-form input, .car-form button {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 80%;
+}
+
+.recommendation-box {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 80%;
+    margin: auto;
+}

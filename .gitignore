@@ -1,0 +1,30 @@
+# Node.js dependencies
+/node_modules/
+/frontend/node_modules/
+
+# Environment variables
+/backend/.env
+/frontend/.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+
+# IDE/Editor folders
+.idea/         # IntelliJ, WebStorm
+.vscode/       # VSCode
+
+# npm package lock files
+frontend/package-lock.json
+backend/package-lock.json
+
+# Other files to ignore
+*.env
+*.swp
