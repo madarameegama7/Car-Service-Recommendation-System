@@ -1,4 +1,11 @@
-const openai = require("../config/openaiConfig");
+const genAI = require("../config/geminiConfig");
+
+const formatResponse = (response) => {
+    return response
+        .replace(/\*\*/g, "")  // Remove existing bold markers (optional)
+        .replace(/\*/g, "**")  // Ensure bold formatting with Markdown style
+        .replace(/\n/g, "\n\n");  // Add spacing between sections
+};
 
 const generateRecommendation = async (req, res) => {
     try {
@@ -20,13 +27,14 @@ const generateRecommendation = async (req, res) => {
         Based on this data, recommend the next car service and the expected maintenance.
         `;
 
-        const response = await openai.createCompletion({
-            model: "gpt-3.5-turbo",
-            prompt: prompt,
-            max_tokens: 150,
-        });
+        // Call Gemini API
+        const response = await genAI.getGeminiResponse(prompt);
+        
+        // Format the response
+        const formattedResponse = formatResponse(response);
 
-        res.json({ recommendation: response.data.choices[0].text.trim() });
+        // Send the formatted recommendation response
+        res.json({ recommendation: formattedResponse });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to generate recommendation" });
