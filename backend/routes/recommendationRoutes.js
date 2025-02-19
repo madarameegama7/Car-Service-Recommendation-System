@@ -1,7 +1,8 @@
 const express = require("express");
-const { getServiceRecommendation } = require("../controllers/recommendationController");
+const { generateRecommendation } = require("../controllers/recommendationController");
 
 const router = express.Router();
-router.post("/recommend-service", getServiceRecommendation);
+
+router.post("/recommend", generateRecommendation);
 
 module.exports = router;

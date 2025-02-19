@@ -1,29 +1,36 @@
-const axios = require("axios");
+const openai = require("../config/openaiConfig");
 
-exports.getServiceRecommendation = async (req, res) => {
+const generateRecommendation = async (req, res) => {
     try {
-        const { mileage, lastServiceDate, carModel, issues } = req.body;
-        const prompt = `Based on the car details: 
-        - Model: ${carModel} 
-        - Mileage: ${mileage} km 
-        - Last service date: ${lastServiceDate} 
-        - Issues reported: ${issues || "None"} 
-        
-        Suggest the next car service date and required maintenance.`;
+        const carDetails = req.body;
+        const prompt = `
+        A user has provided the following car details:
+        - Brand: ${carDetails.brand}
+        - Model: ${carDetails.carModel}
+        - Manufactured Year: ${carDetails.carManufacturedYear}
+        - Mileage: ${carDetails.mileage} km
+        - Last Engine Oil Change: ${carDetails.lastEngineOilChangedDate}
+        - Last Gear Oil Change: ${carDetails.lastGearOilChangedDate}
+        - Last Brake Oil Change: ${carDetails.lastBreakOilChangedDate}
+        - Last Water Level Check: ${carDetails.lastWaterLevelCheckedDate}
+        - Last Oil Level Check: ${carDetails.lastOilLevelCheckedDate}
+        - Last Brake Pad Change: ${carDetails.lastBreakPadChangedDate}
+        - Issues: ${carDetails.issues || "None"}
 
-        const response = await axios.post(
-            "https://api.openai.com/v1/chat/completions",
-            {
-                model: "gpt-3.5-turbo",
-                messages: [{ role: "system", content: prompt }],
-                max_tokens: 100,
-            },
-            { headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}` } }
-        );
+        Based on this data, recommend the next car service and the expected maintenance.
+        `;
 
-        res.json({ recommendation: response.data.choices[0].message.content });
+        const response = await openai.createCompletion({
+            model: "gpt-3.5-turbo",
+            prompt: prompt,
+            max_tokens: 150,
+        });
+
+        res.json({ recommendation: response.data.choices[0].text.trim() });
     } catch (error) {
-        console.error("Error:", error);
+        console.error(error);
         res.status(500).json({ error: "Failed to generate recommendation" });
     }
 };
+
+module.exports = { generateRecommendation };
