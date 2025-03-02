@@ -8,7 +8,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Car Service Recommendation System</h1>
+            <h1>TurboCare Car Service</h1>
             <CarServiceForm setRecommendation={setRecommendation} />
             <RecommendationDisplay recommendation={recommendation} />
         </div>
