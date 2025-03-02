@@ -19,12 +19,10 @@ const generateRecommendation = async (req, res) => {
         - Last Engine Oil Change: ${carDetails.lastEngineOilChangedDate}
         - Last Gear Oil Change: ${carDetails.lastGearOilChangedDate}
         - Last Brake Oil Change: ${carDetails.lastBreakOilChangedDate}
-        - Last Water Level Check: ${carDetails.lastWaterLevelCheckedDate}
-        - Last Oil Level Check: ${carDetails.lastOilLevelCheckedDate}
         - Last Brake Pad Change: ${carDetails.lastBreakPadChangedDate}
         - Issues: ${carDetails.issues || "None"}
 
-        Based on this data, recommend the next car service and the expected maintenance.
+        Based on this data, recommend the next car service and the expected maintenance with relevant date. Give me only next estimated service for next engine oil change, next gear oil change, next break oil change and next break pas change.
         `;
 
         // Call Gemini API

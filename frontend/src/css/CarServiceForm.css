@@ -1,32 +1,65 @@
-/* CarServiceForm.css */
-
-.car-form {
-    max-width: 800px; /* Increased max-width to accommodate two columns */
-    margin: auto;
-    padding: 20px;
-    background: lightblue;
+/* Form Container - Flexbox Layout */
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 20px; /* Spacing between grid items */
+    overflow: hidden;
+    gap: 20px;
 }
 
+/* Left side - Image */
+.image-container {
+    flex: 1;
+    text-align: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 500px;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Right side - Form */
+.car-form {
+    flex: 1;
+    padding: 30px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Form Title */
+.car-form h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
 .car-form label {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #007bff;
     margin-bottom: 5px;
-    display: block; /* Ensure labels are on their own line */
 }
 
 .car-form input {
     width: 100%;
-    padding: 10px 0px;
-    margin-top: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    
+    transition: border-color 0.3s;
+    font-family: 'Poppins', sans-serif;
 }
 
 .car-form input:focus {
@@ -34,44 +67,44 @@
     outline: none;
 }
 
+/* Issues Section */
+.car-form input[name="issues"] {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Submit Button */
 .car-form button {
-    grid-column: span 2; /* Make the button span both columns */
     background: #007bff;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
     transition: background 0.3s;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .car-form button:hover {
     background: #0056b3;
 }
 
-/* Add this to your existing CSS */
-
-.car-form .issues-container {
-    grid-column: span 2; /* Make this container span both columns */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    gap: 15px; /* Add spacing between the input and button */
-}
-
-.car-form input[name="issues"]{
-    grid-column: 1 / -1; /* Span across all columns */
-    justify-self: center; /* Center horizontally */
-    width: 80%; /* Adjust width as needed */
-}
-
-@media (max-width: 600px) {
-    .car-form {
-        grid-template-columns: 1fr; /* Stacks form fields on small screens */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        max-width: 90%;
     }
 
-    .car-form button {
-        grid-column: span 1; /* Reset button to single column on small screens */
+    .image-container img {
+        max-height: 300px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .car-form {
+        padding: 20px;
     }
 }
